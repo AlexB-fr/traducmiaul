@@ -7,8 +7,59 @@ import { LANGS, detectLang, t, type Lang } from "../lib/i18n";
 type Status = "idle" | "recording" | "analyzing" | "translated" | "error";
 type Result = { intent: string; lang: string; translation: string };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 const MAX_SECONDS = 5;
+
+/** Encode mono Float32 samples as 16-bit PCM WAV. */
+function encodeWav(samples: Float32Array, sampleRate: number): Blob {
+  const buffer = new ArrayBuffer(44 + samples.length * 2);
+  const v = new DataView(buffer);
+  const writeStr = (off: number, s: string) => {
+    for (let i = 0; i < s.length; i++) v.setUint8(off + i, s.charCodeAt(i));
+  };
+  writeStr(0, "RIFF");
+  v.setUint32(4, 36 + samples.length * 2, true);
+  writeStr(8, "WAVE");
+  writeStr(12, "fmt ");
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, sampleRate, true);
+  v.setUint32(28, sampleRate * 2, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  writeStr(36, "data");
+  v.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    v.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+  }
+  return new Blob([buffer], { type: "audio/wav" });
+}
+
+/**
+ * Transcode a recorded blob (webm/opus, mp4/aac, ...) to WAV.
+ * The backend decodes with soundfile, which cannot read webm/opus —
+ * but browsers decode those fine via decodeAudioData.
+ */
+async function blobToWav(blob: Blob): Promise<Blob> {
+  const raw = await blob.arrayBuffer();
+  const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+  const ctx = new Ctx();
+  try {
+    const audio = await ctx.decodeAudioData(raw);
+    const sr = audio.sampleRate;
+    const len = Math.min(audio.length, Math.floor(sr * MAX_SECONDS));
+    const mono = new Float32Array(len);
+    for (let c = 0; c < audio.numberOfChannels; c++) {
+      const data = audio.getChannelData(c);
+      for (let i = 0; i < len; i++) mono[i] += data[i] / audio.numberOfChannels;
+    }
+    return encodeWav(mono, sr);
+  } finally {
+    void ctx.close();
+  }
+}
 
 declare global {
   interface Window {
@@ -53,16 +104,31 @@ export default function Home() {
       setStatus("analyzing");
       setError(null);
       try {
+        const wav = await blobToWav(blob);
         const form = new FormData();
-        form.append("file", blob, "meow.webm");
+        form.append("file", wav, "meow.wav");
         form.append("lang", lang);
-        const res = await fetch(`${API_URL}/api/translate`, { method: "POST", body: form });
-        if (!res.ok) throw new Error(`API ${res.status}`);
+        let res: Response;
+        try {
+          res = await fetch(`${API_URL}/api/translate`, { method: "POST", body: form });
+        } catch {
+          throw new Error("network");
+        }
+        if (!res.ok) {
+          let detail = "";
+          try {
+            detail = ((await res.json()) as { detail?: string }).detail ?? "";
+          } catch {
+            /* non-JSON error body */
+          }
+          throw new Error(detail || `HTTP ${res.status}`);
+        }
         const data = (await res.json()) as Result;
         setResult(data);
         setStatus("translated");
-      } catch {
-        setError(t(lang, "error"));
+      } catch (e) {
+        const reason = e instanceof Error ? e.message : "";
+        setError(reason === "network" ? `${t(lang, "error")} (network)` : reason ? `${t(lang, "error")} (${reason})` : t(lang, "error"));
         setStatus("error");
       }
     },
