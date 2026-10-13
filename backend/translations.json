@@ -1,0 +1,37 @@
+{
+  "hunger": {
+    "en": "Human, my bowl is 4% empty. Feed me now.",
+    "fr": "Humain, ma gamelle est vide à 4 %. Nourris-moi immédiatement.",
+    "es": "Humano, mi plato está vacío al 4 %. Aliméntame ahora.",
+    "de": "Mensch, mein Napf ist zu 4 % leer. Füttere mich sofort.",
+    "it": "Umano, la mia ciotola è vuota al 4%. Dammi da mangiare subito."
+  },
+  "attention": {
+    "en": "Look at me. Look. At. Me. I am the main character.",
+    "fr": "Regarde-moi. Regarde. Moi. Je suis la star ici.",
+    "es": "Mírame. Mí-ra-me. Yo soy la protagonista.",
+    "de": "Schau mich an. Schau. Mich. An. Ich bin der Star.",
+    "it": "Guardami. Guar-da-mi. Io sono la star."
+  },
+  "rage": {
+    "en": "You moved my sunbeam?! There will be consequences at 3 AM.",
+    "fr": "Tu as déplacé mon rayon de soleil ?! Il y aura des conséquences à 3h du matin.",
+    "es": "¿Moviste mi rayo de sol? Habrá consecuencias a las 3 AM.",
+    "de": "Du hast meinen Sonnenstrahl verschoben?! Das hat um 3 Uhr nachts Konsequenzen.",
+    "it": "Hai spostato il mio raggio di sole?! Ci saranno conseguenze alle 3 di notte."
+  },
+  "philosophy": {
+    "en": "If I knock this glass off... is it gravity, or destiny? Mrrp.",
+    "fr": "Si je fais tomber ce verre... est-ce la gravité ou le destin ? Mrrp.",
+    "es": "Si tiro este vaso... ¿es gravedad o destino? Mrrp.",
+    "de": "Wenn ich dieses Glas runterschubse... ist es Schwerkraft oder Schicksal? Mrrp.",
+    "it": "Se faccio cadere questo bicchiere... è gravità o destino? Mrrp."
+  },
+  "sleep": {
+    "en": "Shh. Recharging cuteness. Do not disturb for 16 hours.",
+    "fr": "Chut. Je recharge ma mignonnerie. Ne pas déranger pendant 16 heures.",
+    "es": "Shh. Recargando ternura. No molestar durante 16 horas.",
+    "de": "Pssst. Niedlichkeit wird aufgeladen. 16 Stunden nicht stören.",
+    "it": "Shh. Sto ricaricando la tenerezza. Non disturbare per 16 ore."
+  }
+}
