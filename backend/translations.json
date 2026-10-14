@@ -1,37 +1,187 @@
 {
   "hunger": {
-    "en": "Human, my bowl is 4% empty. Feed me now.",
-    "fr": "Humain, ma gamelle est vide à 4 %. Nourris-moi immédiatement.",
-    "es": "Humano, mi plato está vacío al 4 %. Aliméntame ahora.",
-    "de": "Mensch, mein Napf ist zu 4 % leer. Füttere mich sofort.",
-    "it": "Umano, la mia ciotola è vuota al 4%. Dammi da mangiare subito."
+    "en": [
+      "Human, my bowl is 4% empty. Feed me now.",
+      "I haven't eaten in at least 20 minutes. This is an emergency.",
+      "The kibble at the bottom doesn't count. Refill. Now.",
+      "I caught a glimpse of your sandwich. Sharing is caring.",
+      "Feed me, and I might let you sleep tonight. Might."
+    ],
+    "fr": [
+      "Humain, ma gamelle est vide à 4 %. Nourris-moi immédiatement.",
+      "Je n'ai rien mangé depuis au moins 20 minutes. C'est une urgence.",
+      "Les croquettes du fond ne comptent pas. Remplis. Tout de suite.",
+      "J'ai aperçu ton sandwich. Partager, c'est aimer.",
+      "Nourris-moi et je te laisserai peut-être dormir cette nuit. Peut-être."
+    ],
+    "es": [
+      "Humano, mi plato está vacío al 4 %. Aliméntame ahora.",
+      "No he comido en al menos 20 minutos. Es una emergencia.",
+      "Las croquetas del fondo no cuentan. Rellena. Ya.",
+      "He visto tu sándwich. Compartir es amar.",
+      "Aliméntame y quizá te deje dormir esta noche. Quizá."
+    ],
+    "de": [
+      "Mensch, mein Napf ist zu 4 % leer. Füttere mich sofort.",
+      "Ich habe seit mindestens 20 Minuten nichts gefressen. Das ist ein Notfall.",
+      "Das Futter am Boden zählt nicht. Nachfüllen. Sofort.",
+      "Ich habe dein Sandwich gesehen. Teilen heißt lieben.",
+      "Füttere mich, und ich lasse dich heute Nacht vielleicht schlafen. Vielleicht."
+    ],
+    "it": [
+      "Umano, la mia ciotola è vuota al 4%. Dammi da mangiare subito.",
+      "Non mangio da almeno 20 minuti. È un'emergenza.",
+      "Le crocchette in fondo non contano. Riempi. Subito.",
+      "Ho visto il tuo panino. Condividere è amare.",
+      "Dammi da mangiare e forse ti lascerò dormire stanotte. Forse."
+    ]
   },
   "attention": {
-    "en": "Look at me. Look. At. Me. I am the main character.",
-    "fr": "Regarde-moi. Regarde. Moi. Je suis la star ici.",
-    "es": "Mírame. Mí-ra-me. Yo soy la protagonista.",
-    "de": "Schau mich an. Schau. Mich. An. Ich bin der Star.",
-    "it": "Guardami. Guar-da-mi. Io sono la star."
+    "en": [
+      "Look at me. Look. At. Me. I am the main character.",
+      "You stopped petting me 3 seconds ago. Explain yourself.",
+      "I sat on your keyboard. Now I'm your priority.",
+      "Pet me. No, not like that. Yes. No. YES.",
+      "I brought you a toy. Worship me accordingly."
+    ],
+    "fr": [
+      "Regarde-moi. Regarde. Moi. Je suis la star ici.",
+      "Tu as arrêté de me caresser il y a 3 secondes. Explique-toi.",
+      "Je me suis assis sur ton clavier. Je suis ta priorité.",
+      "Caresse-moi. Non, pas comme ça. Si. Non. SI.",
+      "Je t'ai apporté un jouet. Vénère-moi comme il se doit."
+    ],
+    "es": [
+      "Mírame. Mí-ra-me. Yo soy la protagonista.",
+      "Dejaste de acariciarme hace 3 segundos. Explícate.",
+      "Me senté en tu teclado. Ahora soy tu prioridad.",
+      "Acaríciame. No, así no. Sí. No. ¡SÍ!",
+      "Te traje un juguete. Adórame como merezco."
+    ],
+    "de": [
+      "Schau mich an. Schau. Mich. An. Ich bin der Star.",
+      "Du hast vor 3 Sekunden aufgehört, mich zu streicheln. Erklär dich.",
+      "Ich sitze auf deiner Tastatur. Jetzt bin ich deine Priorität.",
+      "Streichel mich. Nein, nicht so. Doch. Nein. DOCH.",
+      "Ich habe dir ein Spielzeug gebracht. Verehre mich entsprechend."
+    ],
+    "it": [
+      "Guardami. Guar-da-mi. Io sono la star.",
+      "Hai smesso di accarezzarmi 3 secondi fa. Spiegati.",
+      "Mi sono seduto sulla tua tastiera. Ora sono la tua priorità.",
+      "Accarezzami. No, non così. Sì. No. SÌ.",
+      "Ti ho portato un giochino. Venerami come si deve."
+    ]
   },
   "rage": {
-    "en": "You moved my sunbeam?! There will be consequences at 3 AM.",
-    "fr": "Tu as déplacé mon rayon de soleil ?! Il y aura des conséquences à 3h du matin.",
-    "es": "¿Moviste mi rayo de sol? Habrá consecuencias a las 3 AM.",
-    "de": "Du hast meinen Sonnenstrahl verschoben?! Das hat um 3 Uhr nachts Konsequenzen.",
-    "it": "Hai spostato il mio raggio di sole?! Ci saranno conseguenze alle 3 di notte."
+    "en": [
+      "You moved my sunbeam?! There will be consequences at 3 AM.",
+      "The vet. You said 'vet'. I heard everything.",
+      "You closed the door. THE door. Unacceptable.",
+      "My favorite box is gone. Someone will pay. Probably you.",
+      "You laughed at my zoomies? Bold. Very bold."
+    ],
+    "fr": [
+      "Tu as déplacé mon rayon de soleil ?! Il y aura des conséquences à 3h du matin.",
+      "Le véto. Tu as dit « véto ». J'ai tout entendu.",
+      "Tu as fermé la porte. LA porte. Inacceptable.",
+      "Mon carton préféré a disparu. Quelqu'un paiera. Probablement toi.",
+      "Tu as ri de mes zoomies ? Audacieux. Très audacieux."
+    ],
+    "es": [
+      "¿Moviste mi rayo de sol? Habrá consecuencias a las 3 AM.",
+      "El veterinario. Dijiste «veterinario». Lo oí todo.",
+      "Cerraste la puerta. LA puerta. Inaceptable.",
+      "Mi caja favorita desapareció. Alguien pagará. Probablemente tú.",
+      "¿Te reíste de mis zoomies? Atrevido. Muy atrevido."
+    ],
+    "de": [
+      "Du hast meinen Sonnenstrahl verschoben?! Das hat um 3 Uhr nachts Konsequenzen.",
+      "Der Tierarzt. Du hast «Tierarzt» gesagt. Ich habe alles gehört.",
+      "Du hast die Tür geschlossen. DIE Tür. Inakzeptabel.",
+      "Mein Lieblingskarton ist weg. Jemand wird zahlen. Wahrscheinlich du.",
+      "Du hast über meine Zoomies gelacht? Mutig. Sehr mutig."
+    ],
+    "it": [
+      "Hai spostato il mio raggio di sole?! Ci saranno conseguenze alle 3 di notte.",
+      "Il veterinario. Hai detto «veterinario». Ho sentito tutto.",
+      "Hai chiuso la porta. LA porta. Inaccettabile.",
+      "La mia scatola preferita è sparita. Qualcuno pagherà. Probabilmente tu.",
+      "Hai riso delle mie zoomies? Audace. Molto audace."
+    ]
   },
   "philosophy": {
-    "en": "If I knock this glass off... is it gravity, or destiny? Mrrp.",
-    "fr": "Si je fais tomber ce verre... est-ce la gravité ou le destin ? Mrrp.",
-    "es": "Si tiro este vaso... ¿es gravedad o destino? Mrrp.",
-    "de": "Wenn ich dieses Glas runterschubse... ist es Schwerkraft oder Schicksal? Mrrp.",
-    "it": "Se faccio cadere questo bicchiere... è gravità o destino? Mrrp."
+    "en": [
+      "If I knock this glass off... is it gravity, or destiny? Mrrp.",
+      "I stare at the wall because the wall understands me.",
+      "Schrödinger had a cat. I AM the cat. Think about it.",
+      "The red dot cannot be caught, yet I chase it. Such is life.",
+      "I sleep 16 hours a day and still dream bigger than you."
+    ],
+    "fr": [
+      "Si je fais tomber ce verre... est-ce la gravité ou le destin ? Mrrp.",
+      "Je fixe le mur parce que le mur me comprend.",
+      "Schrödinger avait un chat. JE SUIS ce chat. Médite là-dessus.",
+      "Le point rouge est insaisissable, pourtant je le chasse. Ainsi va la vie.",
+      "Je dors 16 heures par jour et je rêve plus grand que toi."
+    ],
+    "es": [
+      "Si tiro este vaso... ¿es gravedad o destino? Mrrp.",
+      "Miro la pared porque la pared me comprende.",
+      "Schrödinger tenía un gato. YO SOY ese gato. Piénsalo.",
+      "El punto rojo no se puede atrapar, y aun así lo persigo. Así es la vida.",
+      "Duermo 16 horas al día y aun así sueño más grande que tú."
+    ],
+    "de": [
+      "Wenn ich dieses Glas runterschubse... ist es Schwerkraft oder Schicksal? Mrrp.",
+      "Ich starre die Wand an, weil die Wand mich versteht.",
+      "Schrödinger hatte eine Katze. ICH BIN diese Katze. Denk drüber nach.",
+      "Der rote Punkt ist unfangbar, doch ich jage ihn. So ist das Leben.",
+      "Ich schlafe 16 Stunden am Tag und träume trotzdem größer als du."
+    ],
+    "it": [
+      "Se faccio cadere questo bicchiere... è gravità o destino? Mrrp.",
+      "Fisso il muro perché il muro mi capisce.",
+      "Schrödinger aveva un gatto. IO SONO quel gatto. Riflettici.",
+      "Il puntino rosso è inafferrabile, eppure lo inseguo. Così è la vita.",
+      "Dormo 16 ore al giorno e sogno comunque più in grande di te."
+    ]
   },
   "sleep": {
-    "en": "Shh. Recharging cuteness. Do not disturb for 16 hours.",
-    "fr": "Chut. Je recharge ma mignonnerie. Ne pas déranger pendant 16 heures.",
-    "es": "Shh. Recargando ternura. No molestar durante 16 horas.",
-    "de": "Pssst. Niedlichkeit wird aufgeladen. 16 Stunden nicht stören.",
-    "it": "Shh. Sto ricaricando la tenerezza. Non disturbare per 16 ore."
+    "en": [
+      "Shh. Recharging cuteness. Do not disturb for 16 hours.",
+      "I'm not lazy. I'm energy-efficient.",
+      "Wake me only if the house is on fire. Or for snacks.",
+      "This sunbeam is mine. I live here now.",
+      "Purring in sleep mode. All systems cozy."
+    ],
+    "fr": [
+      "Chut. Je recharge ma mignonnerie. Ne pas déranger pendant 16 heures.",
+      "Je ne suis pas paresseux. Je suis économe en énergie.",
+      "Ne me réveille que si la maison brûle. Ou pour des friandises.",
+      "Ce rayon de soleil est à moi. J'habite ici maintenant.",
+      "Ronron en mode veille. Tous systèmes confortables."
+    ],
+    "es": [
+      "Shh. Recargando ternura. No molestar durante 16 horas.",
+      "No soy perezoso. Soy eficiente con la energía.",
+      "Despiértame solo si la casa arde. O por premios.",
+      "Este rayo de sol es mío. Ahora vivo aquí.",
+      "Ronroneo en modo reposo. Todos los sistemas cómodos."
+    ],
+    "de": [
+      "Pssst. Niedlichkeit wird aufgeladen. 16 Stunden nicht stören.",
+      "Ich bin nicht faul. Ich bin energieeffizient.",
+      "Weck mich nur, wenn das Haus brennt. Oder für Leckerlis.",
+      "Dieser Sonnenstrahl gehört mir. Ich wohne jetzt hier.",
+      "Schnurren im Ruhemodus. Alle Systeme gemütlich."
+    ],
+    "it": [
+      "Shh. Sto ricaricando la tenerezza. Non disturbare per 16 ore.",
+      "Non sono pigro. Sono efficiente dal punto di vista energetico.",
+      "Svegliami solo se la casa va a fuoco. O per gli snack.",
+      "Questo raggio di sole è mio. Ora abito qui.",
+      "Fusa in modalità riposo. Tutti i sistemi confortevoli."
+    ]
   }
 }

@@ -9,6 +9,34 @@ type Result = { intent: string; lang: string; translation: string };
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/+$/, "");
 const MAX_SECONDS = 5;
+// Free-tier backends sleep: wake-up takes ~30-60s. Abort stuck calls,
+// then retry once (the retry hits a warm backend).
+const REQUEST_TIMEOUT_MS = 60000;
+
+async function postTranslate(form: FormData): Promise<Result> {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+  try {
+    let res: Response;
+    try {
+      res = await fetch(`${API_URL}/api/translate`, { method: "POST", body: form, signal: ctrl.signal });
+    } catch (e) {
+      throw new Error(e instanceof DOMException && e.name === "AbortError" ? "timeout" : "network");
+    }
+    if (!res.ok) {
+      let detail = "";
+      try {
+        detail = ((await res.json()) as { detail?: string }).detail ?? "";
+      } catch {
+        /* non-JSON error body */
+      }
+      throw new Error(detail || `HTTP ${res.status}`);
+    }
+    return (await res.json()) as Result;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 /** Encode mono Float32 samples as 16-bit PCM WAV. */
 function encodeWav(samples: Float32Array, sampleRate: number): Blob {
@@ -108,27 +136,23 @@ export default function Home() {
         const form = new FormData();
         form.append("file", wav, "meow.wav");
         form.append("lang", lang);
-        let res: Response;
-        try {
-          res = await fetch(`${API_URL}/api/translate`, { method: "POST", body: form });
-        } catch {
-          throw new Error("network");
-        }
-        if (!res.ok) {
-          let detail = "";
+        let data: Result | null = null;
+        let reason = "";
+        for (let attempt = 0; attempt < 2 && !data; attempt++) {
           try {
-            detail = ((await res.json()) as { detail?: string }).detail ?? "";
-          } catch {
-            /* non-JSON error body */
+            data = await postTranslate(form);
+          } catch (e) {
+            reason = e instanceof Error ? e.message : "";
+            if (reason !== "timeout" && reason !== "network") break;
           }
-          throw new Error(detail || `HTTP ${res.status}`);
         }
-        const data = (await res.json()) as Result;
+        if (!data) throw new Error(reason);
         setResult(data);
         setStatus("translated");
       } catch (e) {
         const reason = e instanceof Error ? e.message : "";
-        setError(reason === "network" ? `${t(lang, "error")} (network)` : reason ? `${t(lang, "error")} (${reason})` : t(lang, "error"));
+        const hint = reason === "timeout" ? "timeout — backend waking up?" : reason;
+        setError(hint ? `${t(lang, "error")} (${hint})` : t(lang, "error"));
         setStatus("error");
       }
     },

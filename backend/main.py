@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import io
 import json
+import random
 from pathlib import Path
 
 import librosa
@@ -19,7 +20,7 @@ MAX_SECONDS = 5.0
 
 _translations_path = Path(__file__).with_name("translations.json")
 with _translations_path.open(encoding="utf-8") as f:
-    TRANSLATIONS: dict[str, dict[str, str]] = json.load(f)
+    TRANSLATIONS: dict[str, dict[str, list[str] | str]] = json.load(f)
 
 app = FastAPI(title="traductmiaul — Cat Meow Translator")
 
@@ -40,6 +41,23 @@ def health() -> dict[str, str]:
 def _normalize_lang(lang: str) -> str:
     lang = (lang or "en").lower().split("-")[0].split("_")[0]
     return lang if lang in SUPPORTED_LANGS else "en"
+
+
+_last_translation: dict[tuple[str, str], str] = {}
+
+
+def _pick_variant(intent: str, lang: str, options: list[str] | str) -> str:
+    """Random variant, never serving the same text twice in a row per intent+lang."""
+    if not isinstance(options, list) or not options:
+        return options if isinstance(options, str) else ""
+    if len(options) == 1:
+        choice = options[0]
+    else:
+        last = _last_translation.get((intent, lang))
+        pool = [o for o in options if o != last] if last else options
+        choice = random.choice(pool or options)
+    _last_translation[(intent, lang)] = choice
+    return choice
 
 
 def classify_intent(y: np.ndarray, sr: int) -> str:
@@ -91,7 +109,7 @@ async def translate(file: UploadFile = File(...), lang: str = Form("en")) -> dic
         intent = classify_intent(y, int(sr or 22050))
         if intent not in SUPPORTED_INTENTS:
             intent = "philosophy"
-        translation = TRANSLATIONS.get(intent, {}).get(target_lang) or TRANSLATIONS[intent]["en"]
+        translation = _pick_variant(intent, target_lang, TRANSLATIONS.get(intent, {}).get(target_lang) or TRANSLATIONS[intent]["en"])
         return {"intent": intent, "lang": target_lang, "translation": translation}
     finally:
         # GDPR: drop the buffer immediately.

@@ -3,7 +3,7 @@
 > Scaffolded repo: `backend/`, `frontend/`, `bot.py` exist and boot (verified 2026-09-27). `instructions.md` remains the spec.
 
 ## Structure
-- `backend/main.py` — FastAPI app, `POST /api/translate`; `backend/translations.json` — 5 intents × 5 langs humor dict
+- `backend/main.py` — FastAPI app, `POST /api/translate`; `backend/translations.json` — 5 intents × 5 langs × 5 random variants (125 phrases)
 - `backend/requirements.txt`
 - `frontend/app/` — Next.js + Tailwind + Lucide + `@twa-dev/sdk` + lightweight i18n
 - `frontend/package.json`
