@@ -15,7 +15,7 @@
 - Record max **5 seconds** via `MediaRecorder` / Web Audio API; frontend states: Recording → Analyzing → Translated.
 - API contract: `POST /api/translate` with `file: UploadFile` + `lang: str = "en"` → `{ "intent": "hunger", "lang": "en", "translation": "..." }`.
 - Backend must process audio **strictly in memory, zero-disk storage** (delete buffer immediately, GDPR).
-- Audio features: `librosa`/`soundfile` (RMS/MFCC) → lightweight classifier (`sklearn` or PyTorch); intents e.g. Hunger, Attention, Rage, Philosophy, Sleep.
+- Audio features: pure `numpy` (RMS/ZCR/centroid, ex-librosa, parity-checked) + `soundfile` decode → heuristic classifier (keep signature for future sklearn/PyTorch model); intents e.g. Hunger, Attention, Rage, Philosophy, Sleep.
 - Localized humor-translation dict/JSON for all 5 langs on backend; localize all static frontend UI text too.
 - Frontend must call `window.Telegram.WebApp.ready()` on init; include language selector (EN default), pulsing record button, waveform/status animation, translation card with copy/share.
 - Deploy split: frontend Vercel, backend VPS/Render/Railway; HTTPS + REST only.

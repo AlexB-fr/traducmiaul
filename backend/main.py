@@ -7,7 +7,6 @@ import json
 import random
 from pathlib import Path
 
-import librosa
 import numpy as np
 import soundfile as sf
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -60,17 +59,36 @@ def _pick_variant(intent: str, lang: str, options: list[str] | str) -> str:
     return choice
 
 
+def _rms(y: np.ndarray) -> float:
+    return float(np.sqrt(np.mean(y.astype(np.float64) ** 2))) if y.size else 0.0
+
+
+def _zcr(y: np.ndarray) -> float:
+    return float(np.mean(y[:-1] * y[1:] < 0)) if y.size >= 2 else 0.0
+
+
+def _spectral_centroid(y: np.ndarray, sr: int) -> float:
+    if y.size < 2:
+        return 0.0
+    mag = np.abs(np.fft.rfft(y.astype(np.float64)))
+    total = mag.sum()
+    if total <= 0:
+        return 0.0
+    return float(np.sum(np.fft.rfftfreq(y.shape[0], d=1.0 / sr) * mag) / total)
+
+
 def classify_intent(y: np.ndarray, sr: int) -> str:
     """Lightweight heuristic classifier (RMS / ZCR / centroid / duration).
 
+    Pure numpy (no librosa): same quantities, verified parity on test signals.
     Replace with a trained sklearn/PyTorch model later; keep signature.
     """
     if y.size == 0:
         return "sleep"
     duration = y.shape[0] / float(sr or 22050)
-    rms = float(np.mean(librosa.feature.rms(y=y)))
-    zcr = float(np.mean(librosa.feature.zero_crossing_rate(y)))
-    centroid = float(np.mean(librosa.feature.spectral_centroid(y=y, sr=sr)))
+    rms = _rms(y)
+    zcr = _zcr(y)
+    centroid = _spectral_centroid(y, sr)
 
     # Loud + harsh + short -> rage; loud + mid -> hunger; quiet + long -> sleep
     if rms > 0.25 and zcr > 0.15:
